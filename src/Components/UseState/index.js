@@ -1,24 +1,32 @@
 import React from "react"
 const SECURITY_CODE="JR"
 function UseState({name}) {
-  const [inputValue,setInputValue]=React.useState('')
-  const [error,setError]=React.useState(false)
-  const [ok,setOk]=React.useState(false)
-  const [loading,setLoading]=React.useState(false)
-  console.log(inputValue)
+  const [state,setState]=React.useState({
+    inputValue:'',
+    ok:false,
+    error:false,
+    loading:false,
+  })
+  const {inputValue,ok,error,loading}=state
   React.useEffect(()=>{
     if (loading) {
       setTimeout(() => {
         if (inputValue===SECURITY_CODE) {
-            setOk(true)
-            setError(false)
-            setLoading(false)
+            setState({
+                ...state,
+                ok:true,
+                error:false,
+                loading:false,
+            })
         } else {
-            setOk(false)
-            setError(true)
-            setLoading(false)
+            setState({
+                ...state,
+                ok:false,
+                error:true,
+                loading:false,
+            })
         }
-      }, 3000);
+    }, 1000);
     }
   },[loading])
   return (
@@ -30,8 +38,12 @@ function UseState({name}) {
        placeholder="security code"
        value={inputValue}
        onChange={(e)=>{
-        setInputValue(e.target.value)
-       }}
+        setState({
+         ...state,
+         inputValue:e.target.value
+        })
+       }
+      }
       />
       {(!!error && !loading && !ok)&&
         <p>Error: incorret code</p>
@@ -45,7 +57,10 @@ function UseState({name}) {
       <button
        onClick={
         ()=>{
-         setLoading(!loading)
+        setState({
+         ...state,
+         loading:true
+        })
         }
        }
       >Go ahead

@@ -27,7 +27,7 @@ class ClassState extends React.Component {
                 loading:false,
             })
         }
-      },3000)
+      },1000)
     }
   }
   render(){
@@ -37,6 +37,7 @@ class ClassState extends React.Component {
         <h2>Delete {this.props.name}</h2>
         <p>Insert the security code here, please</p>
         <input
+         type="password"
          value={this.state.value}
          onChange={(event)=>{
             this.setState({value:event.target.value})
