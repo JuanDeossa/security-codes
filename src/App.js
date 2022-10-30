@@ -5,7 +5,7 @@ import { ClassState } from './Components/ClassState';
 function App() {
   return (
     <div className="App">
-      <UseState name="u s e"/>
+      <UseState name="u s e S"/>
       <ClassState name="c l a s s"/>
     </div>
   );
